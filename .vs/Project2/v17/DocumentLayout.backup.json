@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1597A0D6-652C-464C-9132-828588CFFDC7}|Project2\\Project2.vcxproj|C:\\Users\\fabio\\OneDrive\\Desktop\\Project2\\Project2\\Origem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1597A0D6-652C-464C-9132-828588CFFDC7}|Project2\\Project2.vcxproj|solutionrelative:Project2\\Origem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1597A0D6-652C-464C-9132-828588CFFDC7}|Project2\\Project2.vcxproj|C:\\USERS\\FABIO\\ONEDRIVE\\DESKTOP\\PROJECT2\\PROJECT2\\INCLUDE\\GLAD\\GLAD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1597A0D6-652C-464C-9132-828588CFFDC7}|Project2\\Project2.vcxproj|solutionrelative:PROJECT2\\INCLUDE\\GLAD\\GLAD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,30 +14,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "glad.h",
-              "DocumentMoniker": "C:\\Users\\fabio\\OneDrive\\Desktop\\Project2\\Project2\\include\\glad\\glad.h",
-              "RelativeDocumentMoniker": "Project2\\include\\glad\\glad.h",
-              "ToolTip": "C:\\Users\\fabio\\OneDrive\\Desktop\\Project2\\Project2\\include\\glad\\glad.h",
-              "RelativeToolTip": "Project2\\include\\glad\\glad.h",
-              "ViewState": "AgIAALQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-06T23:33:27.567Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Origem.cpp",
               "DocumentMoniker": "C:\\Users\\fabio\\OneDrive\\Desktop\\Project2\\Project2\\Origem.cpp",
               "RelativeDocumentMoniker": "Project2\\Origem.cpp",
-              "ToolTip": "C:\\Users\\fabio\\OneDrive\\Desktop\\Project2\\Project2\\Origem.cpp",
-              "RelativeToolTip": "Project2\\Origem.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAGAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\fabio\\OneDrive\\Desktop\\Project2\\Project2\\Origem.cpp*",
+              "RelativeToolTip": "Project2\\Origem.cpp*",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-06T22:39:49.127Z",
               "EditorCaption": ""
