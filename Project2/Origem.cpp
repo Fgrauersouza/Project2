@@ -2,18 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-const char* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n "
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
-const char* fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main()\n"
-"{\n"
-" FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
-"}\n\0";
+#include "VAO.h"
+#include "VBO.h"
+#include "EBO.h"
+#include "shaderClass.h"
+
 
 
 void framebuffer_size_callback(GLFWwindow * window, int widht, int height);
@@ -29,10 +22,25 @@ int main()
 
     GLfloat vertices[] =
     {
-        -0.5f, -0.5f * float(sqrt (3)) / 3, 0.0f,
-        0.5f, -0.5f * float(sqrt (3)) / 3, 0.0f,
-        0.0f, 0.5f * float(sqrt (3)) * 2 / 3, 0.0f
+
+        //       COORDINATES                          |               COLORS
+       -0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f, // Lower left corner
+        0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f, // Lower right corner
+        0.0f,  0.5f * float(sqrt(3)) * 2 / 3, 0.0f,     1.0f, 0.6f,  0.32f, // Upper corner
+       -0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner left
+        0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner right
+        0.0f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f  // Inner down
+
     };
+
+    GLuint indices[] =
+    {
+        0, 3, 5,
+        3, 2, 4,
+        5, 4, 1,
+
+    };
+
 
     GLFWwindow* window;
    
@@ -52,42 +60,19 @@ int main()
 
     glViewport(0, 0, 640, 480);
 
+    Shader shaderProgram("default.vert", "default.frag");
 
-    //All this portion of code will be updated and even goes to another file, after (maybe).
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
+    VAO VAO1;
+    VAO1.Bind();
 
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
+    VBO VBO1(vertices, sizeof(vertices));
+    EBO EBO1(indices, sizeof(indices));
 
-    GLuint shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-    GLuint VAO, VBO;
-
-    glGenVertexArrays(1, &VAO);
-
-    glGenBuffers(1, &VBO);
-
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-    //end of /\ this part of maybe "go to another file" code
-    /*--------------------------------------------------------------------*/
+    VAO1.LinkVBO(VBO1, 0);
+    VAO1.Unbind();
+    VBO1.Unbind();
+    EBO1.Unbind();
+    
 
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     
@@ -107,13 +92,17 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         /*Activate Shader Program*/
-        glUseProgram(shaderProgram);
-
+        //glUseProgram(shaderProgram); - turn on if FUBAR
+        shaderProgram.Activate();
         //Pay attention to this part - !!!
-        glBindVertexArray(VAO);
+        //glBindVertexArray(VAO); - turn on if FUBAR
+
+        /* FUBA - FUCKED UP BEYOND ALL REPAIR */
+
+        VAO1.Bind();
 
         /* NO necessray explanation here*/
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
@@ -129,9 +118,10 @@ int main()
 
 
     //Block added in 19/02/2025 - unable and destroy if necessary!
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
+    VAO1.Delete();
+    VBO1.Delete();
+    EBO1.Delete();
+    shaderProgram.Delete();
 
     //Test glfwDestroyWindow - added in feb 19th / 2025
     glfwDestroyWindow(window);
